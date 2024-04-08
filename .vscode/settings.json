@@ -1,0 +1,36 @@
+{
+    "editor.formatOnSave": true,
+    "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "[scss]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "stylelint.vscode-stylelint",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "[html]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[scss][typescript][html]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "stylelint.snippet": ["css", "scss"],
+    "stylelint.validate": ["css", "scss"],
+    "stylelint.config": {
+        "extends": ["stylelint-config-standard-scss"],
+        "plugins": ["stylelint-prettier"],
+        "rules": {
+            "prettier/prettier": true
+        }
+    }
+}

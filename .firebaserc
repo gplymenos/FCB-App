@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fitness-class-booking---fcb": {
+      "hosting": {
+        "fcb-app": [
+          "fitness-class-booking---fcb"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fitness-class-booking---fcb"
+  }
+}
