@@ -17,6 +17,8 @@ import {
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getPerformance, providePerformance } from '@angular/fire/performance';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { MatNativeDateModule } from '@angular/material/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
@@ -24,6 +26,10 @@ import { routes } from './app.routes';
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
   signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: true,
+    },
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     {
       scopes: ['public_profile', 'email', 'user_likes', 'user_friends'],
@@ -33,13 +39,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
       provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     },
     firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    {
-      requireDisplayName: false,
-      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    },
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
   ],
   tosUrl: '<your-tos-link>',
   privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
@@ -74,10 +73,11 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(provideDatabase(() => getDatabase())),
     importProvidersFrom(providePerformance(() => getPerformance())),
     importProvidersFrom(provideStorage(() => getStorage())),
-
+    importProvidersFrom(MatNativeDateModule),
     {
       provide: USE_AUTH_EMULATOR,
-      useValue: !environment.production ? ['http://localhost:4200'] : undefined,
+      useValue: !environment.production ? ['http://localhost:9099'] : undefined,
     },
+    provideAnimationsAsync('noop'),
   ],
 };
