@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 import { AppComponent } from './app.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {

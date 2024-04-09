@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   firebaseConfig: {
     projectId: 'fitness-class-booking---fcb',
     appId: '1:525203512132:web:615673b5d8068c07381511',

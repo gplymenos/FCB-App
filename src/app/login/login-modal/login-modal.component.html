@@ -1,3 +1,11 @@
 <mat-dialog-content>
-  <firebase-ui></firebase-ui>
+  <input type="text" name="username" #username />
+  <input type="password" name="password" #password />
+  <button (click)="submit(username.value, password.value)">Sign In</button>
+  <button (click)="submit(username.value, password.value, true)">
+    Sign Up
+  </button>
+  <firebase-ui
+    (signInSuccessWithAuthResult)="successCallback($event)"
+  ></firebase-ui>
 </mat-dialog-content>
