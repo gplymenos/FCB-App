@@ -1,5 +1,10 @@
 <h3>Fitness Class Booking - FCB</h3>
 <p>This is a deployment test!!!</p>
-
+<p class="username">{{ loggedInUser?.displayName }}</p>
+<p class="username">{{ loggedInUser?.email }}</p>
+<img src="{{ loggedInUser?.photoURL }}" />
+@if(!loggedInUser) {
 <button (click)="login()">Login</button>
+} @else {
 <button (click)="logout()">Logout</button>
+}

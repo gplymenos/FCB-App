@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import {
+  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { FirebaseUIModule } from 'firebaseui-angular';
+import {
+  FirebaseUIModule,
+  FirebaseUISignInSuccessWithAuthResult,
+} from 'firebaseui-angular';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -22,13 +26,17 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './login-modal.component.scss',
 })
 export class LoginModalComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private dialog: MatDialog) {}
 
-  public signInwithEmail(email: string, password: string) {
-    this.authService.signInWithEmail(email, password);
+  successCallback($event: FirebaseUISignInSuccessWithAuthResult) {
+    this.dialog.closeAll();
   }
 
-  public signUpWithEmail(email: string, password: string) {
-    this.authService.signUpWithEmail(email, password);
+  submit(username: string, password: string, isRegisteration: boolean = false) {
+    if (isRegisteration) {
+      this.authService.signup(username, password);
+    } else {
+      this.authService.signInWithEmail(username, password);
+    }
   }
 }
