@@ -1,38 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { LoginFormState } from '../../enums/login.enums';
 import { AuthService } from '../../services/auth.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'app-sign-in',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-  ],
-  templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.scss',
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  templateUrl: './sign-in.component.html',
+  styleUrl: './sign-in.component.scss',
 })
-export class SignUpComponent {
+export class SignInComponent {
+  @Output() loginFormStateChanged = new EventEmitter();
   errorMessage = '';
+
   constructor(
     private authService: AuthService,
     private dialog: MatDialog,
     private errorHandler: ErrorHandlerService
   ) {}
 
-  submit(username: string, password: string, displayName: string) {
-    this.authService.signup(username, password).subscribe({
+  submit(username: string, password: string) {
+    this.authService.signInWithEmail(username, password).subscribe({
       next: () => {
         this.dialog.closeAll();
       },
@@ -41,5 +35,9 @@ export class SignUpComponent {
         this.errorMessage = errorMessage;
       },
     });
+  }
+
+  forgotPasswordClicked() {
+    this.loginFormStateChanged.emit(LoginFormState.ForgotPassword);
   }
 }

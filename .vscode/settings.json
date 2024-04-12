@@ -19,6 +19,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[scss][typescript][html]": {
+        "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit"
         }

@@ -1,0 +1,31 @@
+<h3>Sign In</h3>
+<mat-form-field appearance="outline">
+  <mat-label>Username</mat-label>
+  <input matInput placeholder="Email" type="email" name="email" #email />
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+  <mat-label>Password</mat-label>
+  <input
+    matInput
+    placeholder="Password"
+    type="password"
+    name="password"
+    #password
+  />
+</mat-form-field>
+
+<ng-container *ngIf="errorMessage">
+  <mat-error>{{ errorMessage }}</mat-error>
+</ng-container>
+
+<button
+  mat-flat-button
+  color="accent"
+  (click)="submit(email.value, password.value)"
+>
+  Sign In
+</button>
+<a mat-button color="primary" (click)="forgotPasswordClicked()" class="link"
+  >Forgot your Password?</a
+>

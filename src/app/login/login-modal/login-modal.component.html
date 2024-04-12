@@ -1,84 +1,34 @@
 <mat-dialog-content>
-  <ng-container *ngIf="isSignup; else signInForm">
+  <ng-container *ngIf="formState == loginFormStatus.SignUp">
     <app-sign-up></app-sign-up>
   </ng-container>
-  <ng-template #signInForm>
-    <ng-container *ngIf="!forgotPassword; else resetPasswordForm">
-      <h3>Sign In</h3>
-      <mat-form-field appearance="fill">
-        <mat-label>Username</mat-label>
-        <input matInput placeholder="Email" type="email" name="email" #email />
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          placeholder="Password"
-          type="password"
-          name="password"
-          #password
-        />
-      </mat-form-field>
-
-      <ng-container *ngIf="errorMessage">
-        <mat-error>{{ errorMessage }}</mat-error>
-      </ng-container>
-
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="submit(email.value, password.value)"
-      >
-        Sign In
-      </button>
-      <a class="" (click)="forgotPassword = true" class="link"
-        >Forgot your Password?</a
-      >
-    </ng-container>
-    <ng-template #resetPasswordForm>
-      <h3>Forgot My Password</h3>
-      <mat-form-field appearance="fill">
-        <mat-label>Username</mat-label>
-        <input
-          matInput
-          placeholder="Email"
-          type="email"
-          name="email"
-          #resetEmail
-        />
-      </mat-form-field>
-      <div *ngIf="resetMessage">{{ resetMessage }}</div>
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="!resetEmail.value"
-        (click)="resetPassword(resetEmail.value)"
-      >
-        Reset Password
-      </button>
-      <button mat-raised-button color="primary" (click)="clearForgottenForm()">
-        Cancel
-      </button>
-    </ng-template>
-  </ng-template>
+  <ng-container *ngIf="formState == loginFormStatus.SignIn">
+    <app-sign-in
+      (loginFormStateChanged)="formStateChanged($event)"
+    ></app-sign-in>
+  </ng-container>
+  <ng-container *ngIf="formState == loginFormStatus.ForgotPassword">
+    <app-forgot-password
+      (formStateChanged)="formStateChanged($event)"
+    ></app-forgot-password>
+  </ng-container>
 
   <firebase-ui
-    *ngIf="!forgotPassword"
-    (signInSuccessWithAuthResult)="successCallback($event)"
+    *ngIf="formState !== loginFormStatus.ForgotPassword"
+    (signInSuccessWithAuthResult)="successCallback()"
   ></firebase-ui>
 
-  @if(isSignup) {
+  @if(formState == loginFormStatus.SignUp) {
   <div class="signUpMessage">
     Already have an account?
-    <a class="link" (click)="isSignup = false; forgotPassword = false"
+    <a mat-button class="link" (click)="formState = loginFormStatus.SignIn"
       >Sign In</a
     >
   </div>
   } @else {
   <div class="signUpMessage">
     Don't have an account?
-    <a class="link" (click)="isSignup = true; forgotPassword = false"
+    <a mat-button class="link" (click)="formState = loginFormStatus.SignUp"
       >Sign Up</a
     >
   </div>
