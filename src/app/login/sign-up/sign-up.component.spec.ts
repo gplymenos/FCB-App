@@ -1,21 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { importProvidersFrom } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { importProvidersFrom } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { FirebaseUIModule } from 'firebaseui-angular';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 import { firebaseUiAuthConfig } from '../../firebase.config';
-import { LoginModalComponent } from './login-modal.component';
+import { SignUpComponent } from './sign-up.component';
 
-describe('LoginModalComponent', () => {
-  let component: LoginModalComponent;
-  let fixture: ComponentFixture<LoginModalComponent>;
+describe('SignUpComponent', () => {
+  let component: SignUpComponent;
+  let fixture: ComponentFixture<SignUpComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommonModule, LoginModalComponent],
+      imports: [SignUpComponent],
       providers: [
         provideAnimations(),
         importProvidersFrom(
@@ -26,7 +26,7 @@ describe('LoginModalComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LoginModalComponent);
+    fixture = TestBed.createComponent(SignUpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
