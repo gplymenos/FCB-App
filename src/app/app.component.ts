@@ -21,20 +21,15 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.authSubscription = this.authService
-      .subscribeAuthentication()
-      .subscribe((user) => {
-        console.log(user);
-      });
-
     this.loggedUserSubscription = this.authService
       .getLoggedUserUpdates()
       .subscribe((user) => {
         if (user) {
           // User is logged in
-          console.log(user);
+          this.loggedInUser = user;
         } else {
           // User is not logged in or has logged out
+          this.loggedInUser = null;
         }
       });
   }

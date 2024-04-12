@@ -58,20 +58,17 @@ export class LoginModalComponent {
     this.dialog.closeAll();
   }
 
-  submit(username: string, password: string, isRegisteration: boolean = false) {
-    {
-      this.authService.signInWithEmail(username, password).subscribe({
-        next: (userCredential: firebase.auth.UserCredential) => {
-          console.log('userCredential');
-          console.log(userCredential);
-        },
-        error: (error) => {
-          const errorMessage = this.errorHandler.handleError(error);
-          console.log(errorMessage);
-          this.errorMessage = errorMessage;
-        },
-      });
-    }
+  submit(username: string, password: string) {
+    this.authService.signInWithEmail(username, password).subscribe({
+      next: (userCredential: firebase.auth.UserCredential) => {
+        this.dialog.closeAll();
+      },
+      error: (error) => {
+        const errorMessage = this.errorHandler.handleError(error);
+        console.log(errorMessage);
+        this.errorMessage = errorMessage;
+      },
+    });
   }
 
   resetPassword(email: string) {
