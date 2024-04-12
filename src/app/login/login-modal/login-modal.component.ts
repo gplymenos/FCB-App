@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import {
   MatDialog,
   MatDialogActions,
@@ -9,21 +8,18 @@ import {
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import firebase from 'firebase/compat/app';
-import {
-  FirebaseUIModule,
-  FirebaseUISignInSuccessWithAuthResult,
-} from 'firebaseui-angular';
-import { AuthService } from '../../services/auth.service';
-import { ErrorHandlerService } from '../../services/error-handler.service';
+
+import { FirebaseUIModule } from 'firebaseui-angular';
+import { LoginFormState } from '../../enums/login.enums';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { SignInComponent } from '../sign-in/sign-in.component';
 import { SignUpComponent } from '../sign-up/sign-up.component';
 
 @Component({
   selector: 'app-login-modal',
   standalone: true,
+  templateUrl: './login-modal.component.html',
+  styleUrl: './login-modal.component.scss',
   imports: [
     CommonModule,
     FirebaseUIModule,
@@ -31,62 +27,24 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
-    MatIconModule,
-    MatCardModule,
     SignUpComponent,
+    SignInComponent,
+    ForgotPasswordComponent,
   ],
-  templateUrl: './login-modal.component.html',
-  styleUrl: './login-modal.component.scss',
 })
 export class LoginModalComponent {
-  errorMessage = '';
-  resetMessage = '';
-  isSignup: boolean = false;
-  forgotPassword: boolean = false;
+  loginFormStatus = LoginFormState;
+  formState: LoginFormState = LoginFormState.SignIn;
   resetEmailSent: boolean = false;
 
-  constructor(
-    private authService: AuthService,
-    private dialog: MatDialog,
-    private errorHandler: ErrorHandlerService
-  ) {}
+  constructor(private dialog: MatDialog) {}
 
-  successCallback($event: FirebaseUISignInSuccessWithAuthResult) {
+  successCallback() {
     this.dialog.closeAll();
   }
 
-  submit(username: string, password: string) {
-    this.authService.signInWithEmail(username, password).subscribe({
-      next: (userCredential: firebase.auth.UserCredential) => {
-        this.dialog.closeAll();
-      },
-      error: (error) => {
-        const errorMessage = this.errorHandler.handleError(error);
-        console.log(errorMessage);
-        this.errorMessage = errorMessage;
-      },
-    });
-  }
-
-  resetPassword(email: string) {
-    this.authService.resetPassword(email).subscribe({
-      next: (userCredential) => {
-        this.resetMessage =
-          'If the email provided matches, a Password Reset Email will be dispatched';
-      },
-      error: (error) => {
-        const errorMessage = this.errorHandler.handleError(error);
-        console.log(errorMessage);
-        this.resetMessage = errorMessage;
-      },
-    });
-  }
-
-  clearForgottenForm() {
-    this.resetMessage = '';
-    this.forgotPassword = false;
+  formStateChanged(event: LoginFormState) {
+    this.formState = event;
   }
 }

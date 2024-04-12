@@ -1,0 +1,195 @@
+// Custom Theming for Angular Material
+@use '@angular/material' as mat;
+
+// Import custom colors
+$charcoal: #264653;  // Primary color
+$saffron: #E9C46A;   // Accent color
+$burnt-sienna: #E76F51; // Warn color
+$sandy-brown: #F4A261;  // Background color
+$persian-green: #2A9D8F;  // Foreground color
+
+// Define complete custom palettes
+$custom-primary-palette: (
+  50: lighten($charcoal, 40%),
+  100: lighten($charcoal, 30%),
+  200: lighten($charcoal, 20%),
+  300: lighten($charcoal, 10%),
+  400: lighten($charcoal, 5%),
+  500: $charcoal,
+  600: darken($charcoal, 5%),
+  700: darken($charcoal, 10%),
+  800: darken($charcoal, 20%),
+  900: darken($charcoal, 30%),
+  A100: lighten($charcoal, 20%),
+  A200: lighten($charcoal, 10%),
+  A400: $charcoal,
+  A700: darken($charcoal, 15%),
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: white,
+    A700: white
+  )
+);
+
+$custom-accent-palette: (
+  50: lighten($saffron, 40%),
+  100: lighten($saffron, 30%),
+  200: lighten($saffron, 20%),
+  300: lighten($saffron, 10%),
+  400: lighten($saffron, 5%),
+  500: $saffron,
+  600: darken($saffron, 5%),
+  700: darken($saffron, 10%),
+  800: darken($saffron, 20%),
+  900: darken($saffron, 30%),
+  A100: lighten($saffron, 20%),
+  A200: lighten($saffron, 10%),
+  A400: $saffron,
+  A700: darken($saffron, 15%),
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: white,
+    A700: white
+  )
+);
+
+$custom-warn-palette: (
+  50: lighten($burnt-sienna, 40%),
+  100: lighten($burnt-sienna, 30%),
+  200: lighten($burnt-sienna, 20%),
+  300: lighten($burnt-sienna, 10%),
+  400: lighten($burnt-sienna, 5%),
+  500: $burnt-sienna,
+  600: darken($burnt-sienna, 5%),
+  700: darken($burnt-sienna, 10%),
+  800: darken($burnt-sienna, 20%),
+  900: darken($burnt-sienna, 30%),
+  A100: lighten($burnt-sienna, 20%),
+  A200: lighten($burnt-sienna, 10%),
+  A400: $burnt-sienna,
+  A700: darken($burnt-sienna, 15%),
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: white,
+    A700: white
+  )
+);
+
+$custom-background-palette: (
+  50: lighten($sandy-brown, 40%),
+  100: lighten($sandy-brown, 30%),
+  200: lighten($sandy-brown, 20%),
+  300: lighten($sandy-brown, 10%),
+  400: lighten($sandy-brown, 5%),
+  500: $sandy-brown,
+  600: darken($sandy-brown, 5%),
+  700: darken($sandy-brown, 10%),
+  800: darken($sandy-brown, 20%),
+  900: darken($sandy-brown, 30%),
+  A100: lighten($sandy-brown, 20%),
+  A200: lighten($sandy-brown, 10%),
+  A400: $sandy-brown,
+  A700: darken($sandy-brown, 15%),
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: white,
+    A700: white
+  )
+);
+
+$custom-foreground-palette: (
+  50: lighten($persian-green, 40%),
+  100: lighten($persian-green, 30%),
+  200: lighten($persian-green, 20%),
+  300: lighten($persian-green, 10%),
+  400: lighten($persian-green, 5%),
+  500: $persian-green,
+  600: darken($persian-green, 5%),
+  700: darken($persian-green, 10%),
+  800: darken($persian-green, 20%),
+  900: darken($persian-green, 30%),
+  A100: lighten($persian-green, 20%),
+  A200: lighten($persian-green, 10%),
+  A400: $persian-green,
+  A700: darken($persian-green, 15%),
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: white,
+    A700: white
+  )
+);
+
+$custom-primary: mat.define-palette($custom-primary-palette);
+$custom-accent: mat.define-palette($custom-accent-palette);
+$custom-warn: mat.define-palette($custom-warn-palette);
+$custom-background: mat.define-palette($custom-background-palette);
+$custom-foreground: mat.define-palette($custom-foreground-palette);
+
+// Apply the theme
+$fcb-app-theme: mat.define-light-theme((
+  color: (
+    primary: $custom-primary,
+    accent: $custom-accent,
+    warn: $custom-warn,
+    background: $custom-background,
+    foreground: $custom-foreground,
+  ),
+));
+
+// Include theme styles for core and each component used in your app.
+@include mat.all-component-themes($fcb-app-theme);

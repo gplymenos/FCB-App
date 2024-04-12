@@ -4,7 +4,7 @@
 <p class="username">{{ loggedInUser?.email }}</p>
 <img src="{{ loggedInUser?.photoURL }}" />
 @if(!loggedInUser) {
-<button (click)="login()">Login</button>
+<button mat-flat-button color="accent" (click)="login()">Login</button>
 } @else {
-<button (click)="logout()">Logout</button>
+<button mat-flat-button color="warn" (click)="logout()">Logout</button>
 }
