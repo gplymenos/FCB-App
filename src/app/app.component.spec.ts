@@ -1,23 +1,12 @@
-import { importProvidersFrom } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { FirebaseUIModule } from 'firebaseui-angular';
-import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { firebaseUiAuthConfig } from './firebase.config';
+import { firebaseProviders } from './firebase.config';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [
-        importProvidersFrom(
-          AngularFireModule.initializeApp(environment.firebaseConfig),
-          AngularFireAuthModule,
-          FirebaseUIModule.forRoot(firebaseUiAuthConfig)
-        ),
-      ],
+      providers: firebaseProviders,
     }).compileComponents();
   });
 

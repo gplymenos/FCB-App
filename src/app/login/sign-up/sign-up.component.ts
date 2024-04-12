@@ -5,7 +5,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import firebase from 'firebase/compat';
 import { AuthService } from '../../services/auth.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 
@@ -32,13 +31,8 @@ export class SignUpComponent {
 
   submit(username: string, password: string, displayName: string) {
     this.authService.signup(username, password).subscribe({
-      next: (userCredential: firebase.auth.UserCredential) => {
-        console.log('userCredential');
-        console.log(userCredential);
-      },
       error: (error) => {
         const errorMessage = this.errorHandler.handleError(error);
-        console.log(errorMessage);
         this.errorMessage = errorMessage;
       },
     });

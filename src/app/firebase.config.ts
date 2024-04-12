@@ -1,4 +1,8 @@
-import { firebase, firebaseui } from 'firebaseui-angular';
+import { importProvidersFrom } from '@angular/core';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
+import { environment } from '../environments/environment.prod';
 
 export const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -12,15 +16,16 @@ export const firebaseUiAuthConfig: firebaseui.auth.Config = {
       provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     },
     firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    {
-      requireDisplayName: false,
-      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    },
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
   ],
   tosUrl: '<your-tos-link>',
   privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
   credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
 };
+
+export const firebaseProviders = [
+  importProvidersFrom(
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+  ),
+];
