@@ -32,7 +32,7 @@
       >
         Sign In
       </button>
-      <a class="" (click)="forgotPassword = true" class="link"
+      <a mat-button (click)="forgotPassword = true" class="link"
         >Forgot your Password?</a
       >
     </ng-container>
@@ -71,14 +71,17 @@
   @if(isSignup) {
   <div class="signUpMessage">
     Already have an account?
-    <a class="link" (click)="isSignup = false; forgotPassword = false"
+    <a
+      mat-button
+      class="link"
+      (click)="isSignup = false; forgotPassword = false"
       >Sign In</a
     >
   </div>
   } @else {
   <div class="signUpMessage">
     Don't have an account?
-    <a class="link" (click)="isSignup = true; forgotPassword = false"
+    <a mat-button class="link" (click)="isSignup = true; forgotPassword = false"
       >Sign Up</a
     >
   </div>
