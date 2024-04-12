@@ -14,7 +14,6 @@ import { AuthService } from './services/auth.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  authSubscription: Subscription;
   loggedUserSubscription: Subscription;
   loggedInUser: firebase.User | null;
 
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authSubscription.unsubscribe();
     this.loggedUserSubscription.unsubscribe();
   }
 }
