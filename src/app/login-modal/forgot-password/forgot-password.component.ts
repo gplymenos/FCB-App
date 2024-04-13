@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { LoginFormState } from '../../enums/login.enums';
+import { loginFormStateEnum } from '../../enums/login.enums';
 import { AuthService } from '../../services/auth.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 
@@ -38,6 +38,6 @@ export class ForgotPasswordComponent {
 
   clearForgottenForm() {
     this.resetMessage = '';
-    this.formStateChanged.emit(LoginFormState.SignIn);
+    this.formStateChanged.emit(loginFormStateEnum.SignIn);
   }
 }

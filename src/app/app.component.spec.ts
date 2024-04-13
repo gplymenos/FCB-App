@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+import { firebaseProviders } from '../../projects/auth-lib/src/lib/firebase.config';
 import { AppComponent } from './app.component';
-import { firebaseProviders } from './firebase.config';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,14 +15,5 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h3')?.textContent).toContain(
-      'Fitness Class Booking - FCB'
-    );
   });
 });

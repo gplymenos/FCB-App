@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { firebaseProviders } from '../../firebase.config';
+import { firebaseProviders } from '../firebase.config';
 import { LoginModalComponent } from './login-modal.component';
 
 describe('LoginModalComponent', () => {

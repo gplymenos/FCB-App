@@ -10,10 +10,10 @@ import {
 } from '@angular/material/dialog';
 
 import { FirebaseUIModule } from 'firebaseui-angular';
-import { LoginFormState } from '../../enums/login.enums';
-import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-import { SignInComponent } from '../sign-in/sign-in.component';
-import { SignUpComponent } from '../sign-up/sign-up.component';
+import { loginFormStateEnum } from '../enums/login.enums';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @Component({
   selector: 'app-login-modal',
@@ -34,8 +34,8 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
   ],
 })
 export class LoginModalComponent {
-  loginFormStatus = LoginFormState;
-  formState: LoginFormState = LoginFormState.SignIn;
+  loginFormStatus = loginFormStateEnum;
+  formState: loginFormStateEnum = loginFormStateEnum.SignIn;
   resetEmailSent: boolean = false;
 
   constructor(private dialog: MatDialog) {}
@@ -44,7 +44,7 @@ export class LoginModalComponent {
     this.dialog.closeAll();
   }
 
-  formStateChanged(event: LoginFormState) {
+  formStateChanged(event: loginFormStateEnum) {
     this.formState = event;
   }
 }

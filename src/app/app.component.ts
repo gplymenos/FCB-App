@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import firebase from 'firebase/compat';
 import { FirebaseUIModule } from 'firebaseui-angular';
 import { Subscription } from 'rxjs';
-import { LoginModalComponent } from './login/login-modal/login-modal.component';
+import { LoginModalComponent } from './login-modal/login-modal.component';
 import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
