@@ -2,15 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
+import {
+  AuthService,
+  FirebaseuiAuthComponent,
+} from '@g.plymenos/ng-firebase-auth';
 import firebase from 'firebase/compat';
-import { FirebaseUIModule } from 'firebaseui-angular';
 import { Subscription } from 'rxjs';
-import { LoginModalComponent } from './login-modal/login-modal.component';
-import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FirebaseUIModule, MatButtonModule],
+  imports: [RouterOutlet, MatButtonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -18,10 +19,13 @@ export class AppComponent implements OnInit, OnDestroy {
   loggedUserSubscription: Subscription;
   loggedInUser: firebase.User | null;
 
-  constructor(private authService: AuthService, private dialog: MatDialog) {}
+  constructor(
+    private firebaseAuthService: AuthService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.loggedUserSubscription = this.authService
+    this.loggedUserSubscription = this.firebaseAuthService
       .getLoggedUserUpdates()
       .subscribe((user) => {
         if (user) {
@@ -35,11 +39,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.dialog.open(LoginModalComponent);
+    this.dialog.open(FirebaseuiAuthComponent);
   }
 
   logout() {
-    this.authService.signOut();
+    this.firebaseAuthService.signOut();
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { firebaseProviders } from '../../projects/auth-lib/src/lib/firebase.config';
 import { AppComponent } from './app.component';
+import { firebaseProviders } from './firebase.config';
 
 describe('AppComponent', () => {
   beforeEach(async () => {

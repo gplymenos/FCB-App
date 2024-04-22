@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+// Define a custom mixin that takes in the current theme
+@mixin color($theme) {
+    :root {
+        --primary: #{mat.get-theme-color($theme, 'primary', 500)};
+        --accent: #{mat.get-theme-color($theme, 'accent', 500)};
+        --warn: #{mat.get-theme-color($theme, 'warn', 500)};
+        --background: #{mat.get-theme-color($theme, 'background', 500)};
+        --foreground: #{mat.get-theme-color($theme, 'foreground', 500)};
+    }
+}

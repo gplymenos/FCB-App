@@ -1,6 +1,5 @@
 import { importProvidersFrom } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
 import { environment } from '../environments/environment.prod';
 
@@ -25,7 +24,6 @@ export const firebaseUiAuthConfig: firebaseui.auth.Config = {
 export const firebaseProviders = [
   importProvidersFrom(
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ),
 ];
