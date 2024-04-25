@@ -1,9 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
 button.mdc-button {
     border-radius: 20px;
+}
+
+.mat-typography h1,
+.mat-typography h2 {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-content {
+    min-width: 500px
+}
+
+.mat-dialog-content {
+    margin-top: 25px;
+}
+
+.mat-dialog-content h1 {
+    margin-bottom: 10px;
+}
+
+.firebaseui-link {
+    cursor: pointer;
 }

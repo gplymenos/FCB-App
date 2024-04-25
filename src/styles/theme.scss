@@ -1,5 +1,6 @@
 // Custom Theming for Angular Material
 @use '@angular/material' as mat;
+@use '../styles/_color-theme' as color;
 
 // Import custom colors
 $charcoal: #264653;  // Primary color
@@ -193,3 +194,4 @@ $fcb-app-theme: mat.define-light-theme((
 
 // Include theme styles for core and each component used in your app.
 @include mat.all-component-themes($fcb-app-theme);
+@include color.color($fcb-app-theme);
