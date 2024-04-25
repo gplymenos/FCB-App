@@ -1,0 +1,7 @@
+<header>
+  @if(!loggedInUser) {
+  <button mat-flat-button color="primary" (click)="login()">Login</button>
+  } @else {
+  <button mat-flat-button color="warn" (click)="logout()">Logout</button>
+  }
+</header>
