@@ -1,4 +1,9 @@
 <header>
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="toggleDrawer()">
+      Toggle sidenav
+    </button>
+  </div>
   @if(!loggedInUser) {
   <button mat-flat-button color="primary" (click)="login()">Login</button>
   } @else {

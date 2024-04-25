@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDrawer } from '@angular/material/sidenav';
 import {
   AuthService,
   FirebaseuiAuthComponent,
@@ -16,6 +17,8 @@ import { Subscription } from 'rxjs';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  @Input('drawerComp') drawerComp: MatDrawer;
+  showFiller = false;
   loggedInUser: firebase.User | null;
   loggedUserSubscription: Subscription;
 
@@ -36,6 +39,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.loggedInUser = null;
         }
       });
+  }
+
+  toggleDrawer() {
+    console.log(this.drawerComp);
+    this.drawerComp.toggle();
   }
 
   login() {
