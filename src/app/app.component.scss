@@ -1,5 +1,16 @@
+:host {
+    display: flex;
+    height: 100%;
+}
+
 .mat-typography h2 {
     color: var(--primary-fcb-app-colour);
+}
+
+.main-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;    
 }
 
 .main-content {

@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 import { MatDrawer } from '@angular/material/sidenav';
 import {
   AuthService,
@@ -12,7 +13,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, MatIcon],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

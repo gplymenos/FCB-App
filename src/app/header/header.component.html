@@ -1,7 +1,12 @@
 <header>
   <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="toggleDrawer()">
-      Toggle sidenav
+    <button
+      mat-icon-button
+      color="primary"
+      aria-label="Side Menu"
+      (click)="toggleDrawer()"
+    >
+      <mat-icon>menu</mat-icon>
     </button>
   </div>
   @if(!loggedInUser) {
