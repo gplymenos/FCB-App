@@ -43,7 +43,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   toggleDrawer() {
-    console.log(this.drawerComp);
     this.drawerComp.toggle();
   }
 
