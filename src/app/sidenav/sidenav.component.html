@@ -1,3 +1,42 @@
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawerEl class="example-sidenav" mode="side"> </mat-drawer>
+  <mat-drawer #drawerEl class="example-sidenav" mode="side">
+    <div class="drawer-custom-wrapper">
+      <div class="logo-wrapper">
+        <img class="logo" src="../../assets/logo.svg" /> AERIAL SOUTHAMPTON
+      </div>
+
+      <ul>
+        @for (route of routes; track $index) {
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="route.path"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Home"
+            [fontIcon]="
+              route.data && route.data['icon'] ? route.data['icon'] : ''
+            "
+          ></mat-icon>
+          {{ route.title }}
+        </li>
+        }
+      </ul>
+
+      <div class="footer">
+        @if(loggedInUser) {
+        <a class="logout" (click)="logout()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Logout"
+            fontIcon="logout"
+            fontSize="small"
+          ></mat-icon>
+          Logout
+        </a>
+        }
+      </div>
+    </div>
+  </mat-drawer>
 </mat-drawer-container>
