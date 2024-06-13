@@ -23,13 +23,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedInUser: firebase.User | null;
   loggedUserSubscription: Subscription;
 
-  constructor(
-    private firebaseAuthService: AuthService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.loggedUserSubscription = this.firebaseAuthService
+    this.loggedUserSubscription = this.authService
       .getLoggedUserUpdates()
       .subscribe((user) => {
         if (user) {
@@ -51,7 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.firebaseAuthService.signOut();
+    this.authService.signOut();
   }
 
   ngOnDestroy(): void {
