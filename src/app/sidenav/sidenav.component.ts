@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
@@ -13,6 +6,7 @@ import { AuthService } from '@g.plymenos/ng-firebase-auth';
 import firebase from 'firebase/compat';
 import { Subscription } from 'rxjs';
 import { routes } from '../app.routes';
+import { SideNavService } from '../side-nav.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -21,8 +15,7 @@ import { routes } from '../app.routes';
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
 })
-export class SidenavComponent implements OnInit, AfterViewInit {
-  @Output('drawer') drawer = new EventEmitter();
+export class SidenavComponent implements OnInit {
   @ViewChild('drawerEl') drawerEl: MatDrawer;
   routes: Routes;
   loggedUserSubscription: Subscription;
@@ -30,7 +23,8 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private sideNavService: SideNavService
   ) {}
 
   ngOnInit(): void {
@@ -46,13 +40,13 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         }
       });
 
+    this.sideNavService.sideNavOpen.subscribe((openStatus: boolean) => {
+      openStatus ? this.drawerEl.open() : this.drawerEl.close();
+    });
+
     this.routes = routes.filter(
       (route) => route.data && route.data['showInNav']
     );
-  }
-
-  ngAfterViewInit(): void {
-    this.drawer.emit(this.drawerEl);
   }
 
   logout() {

@@ -1,14 +1,14 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
-import { MatDrawer } from '@angular/material/sidenav';
 import {
   AuthService,
   FirebaseuiAuthComponent,
 } from '@g.plymenos/ng-firebase-auth';
 import firebase from 'firebase/compat';
 import { Subscription } from 'rxjs';
+import { SideNavService } from '../side-nav.service';
 
 @Component({
   selector: 'app-header',
@@ -18,12 +18,15 @@ import { Subscription } from 'rxjs';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  @Input('drawerComp') drawerComp: MatDrawer;
   showFiller = false;
   loggedInUser: firebase.User | null;
   loggedUserSubscription: Subscription;
 
-  constructor(private authService: AuthService, private dialog: MatDialog) {}
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private sideNavService: SideNavService
+  ) {}
 
   ngOnInit(): void {
     this.loggedUserSubscription = this.authService
@@ -40,7 +43,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   toggleDrawer() {
-    this.drawerComp.toggle();
+    this.sideNavService.toggleSideBar();
   }
 
   login() {
